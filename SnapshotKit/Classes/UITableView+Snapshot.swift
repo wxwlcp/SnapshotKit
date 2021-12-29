@@ -72,17 +72,24 @@ extension UITableView {
                 let indexPath = IndexPath.init(row: row, section: section)
                 if let image = takeSnapshotOfCell(at: indexPath) {
                     shotImages.append(image)
+                    if shotImages.count >= 200 {
+                        break
+                    }
                 }
             }
 
             if let image = takeSnapshotOfSectionFooterView(at: section) {
                 shotImages.append(image)
             }
+            
+            if shotImages.count >= 200 {
+                break
+            }
         }
 
-        if let image = takeSnapshotOfTableFooterView() {
-            shotImages.append(image)
-        }
+//        if let image = takeSnapshotOfTableFooterView() {
+//            shotImages.append(image)
+//        }
 
         guard shotImages.count > 0 else {
             return nil
