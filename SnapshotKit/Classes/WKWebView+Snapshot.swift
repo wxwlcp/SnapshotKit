@@ -37,6 +37,9 @@ extension WKWebView {
         if self.scrollView.contentSize.height > self.scrollView.bounds.height {
             pageNum = Int(floorf(Float(self.scrollView.contentSize.height / self.scrollView.bounds.height)))
         }
+        if pageNum >= 5 { // 最大五屏
+            pageNum = 5
+        }
 
         self.loadPageContent(0, maxIndex: pageNum, completion: {
             self.scrollView.contentOffset = CGPoint.zero

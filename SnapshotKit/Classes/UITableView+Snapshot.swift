@@ -57,6 +57,8 @@ extension UITableView {
 
     private func internalTakeSnapshotOfFullContent()-> UIImage? {
         var shotImages: [UIImage] = []
+        
+        var totalSize = CGSize.init(width: self.bounds.width, height: 0)
 
         if let image = takeSnapshotOfTableHeaderView() {
             shotImages.append(image)
@@ -65,6 +67,10 @@ extension UITableView {
         for section in (0..<self.numberOfSections) {
             if let image = takeSnapshotOfSectionHeaderView(at: section) {
                 shotImages.append(image)
+                totalSize.height += image.size.height
+                if totalSize.height >= UIScreen.main.bounds.height * 5{
+                    break
+                }
             }
 
             let num = self.numberOfRows(inSection: section)
@@ -72,7 +78,8 @@ extension UITableView {
                 let indexPath = IndexPath.init(row: row, section: section)
                 if let image = takeSnapshotOfCell(at: indexPath) {
                     shotImages.append(image)
-                    if shotImages.count >= 200 {
+                    totalSize.height += image.size.height
+                    if totalSize.height >= UIScreen.main.bounds.height * 5{
                         break
                     }
                 }
@@ -80,10 +87,10 @@ extension UITableView {
 
             if let image = takeSnapshotOfSectionFooterView(at: section) {
                 shotImages.append(image)
-            }
-            
-            if shotImages.count >= 200 {
-                break
+                totalSize.height += image.size.height
+                if totalSize.height >= UIScreen.main.bounds.height * 5{
+                    break
+                }
             }
         }
 
@@ -93,12 +100,6 @@ extension UITableView {
 
         guard shotImages.count > 0 else {
             return nil
-        }
-
-        // 合成图片：计算总大小，然后拼接图片
-        var totalSize = CGSize.init(width: self.bounds.width, height: 0)
-        for image in shotImages {
-            totalSize.height += image.size.height
         }
 
         let backgroundColor = self.backgroundColor ?? UIColor.white
