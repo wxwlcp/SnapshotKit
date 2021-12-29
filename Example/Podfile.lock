@@ -1,5 +1,5 @@
 PODS:
-  - SnapshotKit (0.3.0)
+  - SnapshotKit (0.3.2)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SnapshotKit: 5110f6a952c9500f65bd51dae49c8ac0ce8f0f04
+  SnapshotKit: 4e6c25203719cd6be29d3d53a8160c4933102369
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
 PODFILE CHECKSUM: d57c8d5a799c1fb90dc83a5912e06927c96b58ef
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
